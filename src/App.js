@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import Header from "./components/Header";
+import ImageList from "./components/ImageList";
+import "bulma/css/bulma.css";
 
 function App() {
+  const [term, setTerm] = useState("");
+  const formSubmitHandler = (term) => {
+    setTerm(term);
+    console.log(term);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header onFormSubmit={formSubmitHandler} />
+      <section className="section">
+        <h1 className="title">Your awesome images</h1>
+        <h2 className="subtitle">
+          {!term
+            ? "Will appear right here, let's get started!"
+            : "Are right here. Enjoy!"}
+        </h2>
+        <ImageList term={term} />
+      </section>
+    </>
   );
 }
 
